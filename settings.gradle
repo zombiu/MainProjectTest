@@ -14,3 +14,18 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MainProjectTest"
 include ':app'
+//include ':SubProjectTest1:app'
+include ':sub1'
+project(":sub1").projectDir = new File("SubProjectTest1/app")
+
+import groovy.json.JsonSlurper
+
+def config = new File(getRootDir(), "app-config.json")
+if (config.exists()) {
+    def parsedJson = new JsonSlurper().parseText(config.text).get("module")
+    parsedJson.each {
+        key, value ->
+            include ":$key"
+            project(":$key").projectDir = new File("$rootDir", "$key/app")
+    }
+}

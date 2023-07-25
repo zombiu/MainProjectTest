@@ -1,0 +1,3 @@
+[submodule "SubProjectTest1"]
+	path = SubProjectTest1
+	url = https://github.com/zombiu/SubProjectTest1.git
